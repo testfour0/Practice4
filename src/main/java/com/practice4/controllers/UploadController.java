@@ -31,4 +31,15 @@ public class UploadController {
         model.addAttribute("dataItems", dataservice.getData());
         return "display";
     }
+
+
+    @GetMapping("/")
+    public String homePage(){
+        return "home";
+    }
+    /*@PostMapping("/")
+    public String handleReDirect(){
+        return "redirect:/upload";
+    }*/
+
 }

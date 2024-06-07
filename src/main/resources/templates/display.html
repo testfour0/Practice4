@@ -9,14 +9,18 @@
   <h1>Display Page</h1>
   <table border="1">
     <tr>
-      <th>Header 1</th>
-      <th>Header 2</th>
-      <th>Header 3</th>
+      <th>4 Eye Reviewer</th>
+      <th>GO</th>
+      <th>Status</th>
+      <th>Job Name</th>
+      <th>EE</th>
     </tr>
     <tr th:each="item : ${dataItems}">
       <td th:text="${item.column1}"></td>
       <td th:text="${item.column2}"></td>
       <td th:text="${item.column3}"></td>
+      <td th:text="${item.column4}"></td>
+      <td th:text="${item.column5}"></td>
     </tr>
   </table>
 </body>

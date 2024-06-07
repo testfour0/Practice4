@@ -35,7 +35,7 @@ public class DataService {
             dataItems = br.lines().skip(1)
                     .map(line -> {
                         String[] fields = line.split(",");
-                        return new DataItem(fields[0], fields[1], fields[2]);
+                        return new DataItem(fields[0], fields[1], fields[2], fields[3], fields[4]);
                     })
                     .collect(Collectors.toList());
         } catch (Exception e) {
