@@ -7,8 +7,9 @@
 </head>
 <body>
     <h1>Upload Page</h1>
-    <form action="/display" method="get">
-        <button type="submit">data</button>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Upload CSV file</button>
     </form>
 </body>
 </html>
