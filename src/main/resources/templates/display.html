@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Page xD</title>
+</head>
+<body>
+  <h1>Display Page</h1>
+  <table border="1">
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+      <th>Header 3</th>
+    </tr>
+    <tr th:each="item : ${dataItems}">
+      <td th:text="${item.column1}"></td>
+      <td th:text="${item.column2}"></td>
+      <td th:text="${item.column3}"></td>
+    </tr>
+  </table>
+</body>
+</html>
