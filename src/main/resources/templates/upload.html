@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Page :3</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
+    <img src="/images/banner.jpg" class="banner" alt="Banner">
+    <div class="container">
     <h1>Upload Page</h1>
+    <div class="button-container">
     <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept=".csv" required>
         <button type="submit">Upload CSV file</button>
@@ -14,5 +18,10 @@
     <form action="/" method="get">
         <button type="submit">Return to Home</button>
     </form>
+    <form action="/clear" method="post">
+    <button type="submit">Clear Memory</button>
+    </form>
+    </div>
+    </div>
 </body>
 </html>

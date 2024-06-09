@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Page xD</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <style>
   //language=<CSS>
   .hidden {display : none; }
@@ -19,7 +20,10 @@
   </script>
 </head>
 <body>
+  <img src="/images/banner.jpg" class="banner" alt="Banner">
+  <div class="container">
   <h1>Display Page</h1>
+  <div class="button-container">
   <form method="post" action="/display">
     <label><input type="checkbox" name="columns" value="column1" checked onclick="toggleColumn('col1', this.checked)"> 4 Eye Reviewer </label>
     <label><input type="checkbox" name="columns" value="column2" checked onclick="toggleColumn('col2', this.checked)"> GO </label>
@@ -72,5 +76,10 @@
   <form action="/" method="get">
     <button type="submit">Return to Home</button>
   </form>
+  <form action="/clear" method="post">
+    <button type="submit">Clear Memory</button>
+  </form>
+  </div>
+  </div>
 </body>
 </html>

@@ -57,6 +57,12 @@ public class UploadController {
         return "display";
     }
 
+    @PostMapping("/clear")
+    public String clearData(){
+        dataservice.clearData();
+        return "redirect:/upload";
+    }
+
     @GetMapping("/")
     public String homePage(){
         return "home";

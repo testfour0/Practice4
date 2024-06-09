@@ -55,4 +55,8 @@ public class DataService {
                 .filter(item -> item.getColumn5().contains(column5Filter))
                 .collect(Collectors.toList());
     }
+
+    public void clearData(){
+        dataItems.clear();
+    }
 }
