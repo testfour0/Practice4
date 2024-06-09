@@ -4,25 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Page xD</title>
+  <style>
+  //language=<CSS>
+  .hidden {display : none; }
+  </style>
+  <script>
+    //language=<CSS>
+    function toggleColumn(columnClass, isChecked){
+    const columns = document.getElementsByClassName(columnClass);
+    for (let i = 0; i < columns.length; i++){
+      columns[i].style.display = isChecked ? '' : 'none';
+      }
+    }
+  </script>
 </head>
 <body>
   <h1>Display Page</h1>
+  <form method="post" action="/display">
+    <label><input type="checkbox" name="columns" value="column1" checked onclick="toggleColumn('col1', this.checked)"> 4 Eye Reviewer </label>
+    <label><input type="checkbox" name="columns" value="column2" checked onclick="toggleColumn('col2', this.checked)"> GO </label>
+    <label><input type="checkbox" name="columns" value="column3" checked onclick="toggleColumn('col3', this.checked)"> Status </label>
+    <label><input type="checkbox" name="columns" value="column4" checked onclick="toggleColumn('col4', this.checked)"> Job Name </label>
+    <label><input type="checkbox" name="columns" value="column5" checked onclick="toggleColumn('col5', this.checked)"> EE </label>
+    <button type="submit">Reset Selections</button>
+  </form>
+
+  <form method = "post" action="/filter">
+    <label>Filter 4 Eye Reviewer: <input type="text" name="column1Filter"></label>
+    <label>Filter GO: <input type="text" name="column2Filter"></label>
+    <label>Filter Status: <input type="text" name="column3Filter"></label>
+    <label>Filter Job Name: <input type="text" name="column4Filter"></label>
+    <label>Filter EE: <input type="text" name="column5Filter"></label>
+    <button type="submit">Filter</button> <!-- Button to submit the form -->
+  </form>
+
+
   <table border="1">
-    <tr>
-      <th>4 Eye Reviewer</th>
-      <th>GO</th>
-      <th>Status</th>
-      <th>Job Name</th>
-      <th>EE</th>
-    </tr>
-    <tr th:each="item : ${dataItems}">
-      <td th:text="${item.column1}"></td>
-      <td th:text="${item.column2}"></td>
-      <td th:text="${item.column3}"></td>
-      <td th:text="${item.column4}"></td>
-      <td th:text="${item.column5}"></td>
-    </tr>
+    <thead>
+      <tr>
+        <th class="col1">4 Eye Reviewer</th>
+        <th class="col2">GO</th>
+        <th class="col3">Status</th>
+        <th class="col4">Job Name</th>
+        <th class="col5">EE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="item : ${dataItems}">
+        <td class="col1" th:text="${item.column1}"></td>
+        <td class="col2" th:text="${item.column2}"></td>
+        <td class="col3" th:text="${item.column3}"></td>
+        <td class="col4" th:text="${item.column4}"></td>
+        <td class="col5" th:text="${item.column5}"></td>
+      </tr>
+    </tbody>
   </table>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let selectedColumns = [/*[[${selectedColumns}]]*/];
+      selectedColumns = selectedColumns.replace("[", "").replace("]", "").split(",");
+      const allColumns = ['column1', 'column2', 'column3', 'column4', 'column5'];
+      allColumns.forEach(column => {
+        toggleColumn('col${column.charAt(column.length - 1)}', selectedColumns.includes(column.trim()));
+      });
+    });
+  </script>
   <form action="/" method="get">
     <button type="submit">Return to Home</button>
   </form>

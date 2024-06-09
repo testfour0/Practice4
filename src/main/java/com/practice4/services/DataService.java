@@ -45,4 +45,14 @@ public class DataService {
     public List<DataItem> getData(){
         return dataItems;
     }
+
+    public List<DataItem> filterData(String column1Filter, String column2Filter, String column3Filter, String column4Filter, String column5Filter) {
+        return dataItems.stream()
+                .filter(item -> item.getColumn1().contains(column1Filter))
+                .filter(item -> item.getColumn2().contains(column2Filter))
+                .filter(item -> item.getColumn3().contains(column3Filter))
+                .filter(item -> item.getColumn4().contains(column4Filter))
+                .filter(item -> item.getColumn5().contains(column5Filter))
+                .collect(Collectors.toList());
+    }
 }
