@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Attempts</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Login Attempts</h1>
+    <ul>
+      <li th:each="attempt : ${loginAttempts}" th:text="${attempt}"></li>
+    </ul>
+  </div>
+</body>
+</html>
