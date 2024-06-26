@@ -1,15 +1,14 @@
 package com.practice4.services;
 
 import com.practice4.models.DataItem;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,5 +57,21 @@ public class DataService {
 
     public void clearData(){
         dataItems.clear();
+    }
+
+    //Metrics calculations below
+    public Map<String, Long> getJobsByReviewer(){
+        return dataItems.stream().collect(Collectors.groupingBy(DataItem::getColumn1, Collectors.counting()));
+    }
+
+    public long countPendingCorrection(){
+        return dataItems.stream().filter(item -> "Pending Correction".equalsIgnoreCase(item.getColumn3())).count();
+    }
+
+    public Map<String, Long> getStatusCounts(){
+        return dataItems.stream().collect(Collectors.groupingBy(DataItem::getColumn3, Collectors.counting()));
+    }
+    public Map<String, Long> getGOCounts(){
+        return dataItems.stream().collect(Collectors.groupingBy(DataItem::getColumn2, Collectors.counting()));
     }
 }

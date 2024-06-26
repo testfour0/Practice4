@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: none;;
+        }
+        canvas {
+            max-width: 400px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Metrics</h1>
+    <canvas id="4EyeReviewerChart" width="400" height="200"></canvas>
+    <canvas id="statusCountsChart" width="400" height="100"></canvas>
+    <canvas id="GOCountChart" width="400" height="200"></canvas>
+
+    <script>
+        async function fetchMetrics() {
+            try {
+                // Fetch reviewer jobs data
+                const reviewerJobsResponse = await fetch('/api/metrics/reviewer-jobs');
+                if (!reviewerJobsResponse.ok) {
+                    throw new Error('Failed to fetch reviewer jobs data');
+                }
+                const reviewerJobs = await reviewerJobsResponse.json();
+                console.log('Reviewer Jobs Data:', reviewerJobs);
+
+                // Fetch status counts data
+                const statusCountsResponse = await fetch('/api/metrics/status-counts');
+                if (!statusCountsResponse.ok) {
+                    throw new Error('Failed to fetch status counts data');
+                }
+                const statusCounts = await statusCountsResponse.json();
+                console.log('Status Counts Data:', statusCounts);
+
+                const goCountsResponse = await fetch('/api/metrics/go-counts');
+                if (!goCountsResponse.ok) {
+                    throw new Error('Failed to fetch GO counts data');
+                }
+                const goCounts = await goCountsResponse.json();
+                console.log('go Counts Data:', goCounts);
+
+                // Create Reviewer Jobs Chart
+                new Chart(document.getElementById('4EyeReviewerChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(reviewerJobs),
+                        datasets: [{
+                            label: 'Jobs by 4 Eye Reviewer',
+                            data: Object.values(reviewerJobs),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                ///New chart for GO
+
+                new Chart(document.getElementById('GOCountChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(goCounts),
+                        datasets: [{
+                            label: 'GOs logged',
+                            data: Object.values(goCounts),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Create Status Counts Chart
+                new Chart(document.getElementById('statusCountsChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(statusCounts),
+                        datasets: [{
+                            label: 'Status Counts',
+                            data: Object.values(statusCounts),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching metrics:', error);
+            }
+        }
+
+        fetchMetrics();
+
+    </script>
+
+
+</body>
+</html>
